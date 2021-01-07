@@ -1,5 +1,7 @@
 # vue-cesium-next
 
+> Vue3.x integration Cesium
+
 ## Project setup
 ```
 yarn install
@@ -21,4 +23,5 @@ yarn lint
 ```
 
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+See vue.config.js
+
