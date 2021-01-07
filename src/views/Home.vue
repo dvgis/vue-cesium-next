@@ -1,18 +1,35 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <div id="viewer-container" class="viewer-container"></div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import ViewerApi from '@/api/ViewerApi'
 export default {
-  name: "Home",
-  components: {
-    HelloWorld
+  name: 'Home',
+  methods: {
+    initViewer() {
+      let viewerApi = new ViewerApi('viewer-container')
+      viewerApi.addBaseLayer()
+      global.viewerApi = viewerApi
+    }
+  },
+  mounted() {
+    this.initViewer()
   }
-};
+}
 </script>
+
+<style lang="scss" scoped>
+.home {
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
+  .viewer-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+  }
+}
+</style>

@@ -3,6 +3,7 @@
  * @Date: 2020-12-24 12:59:51
  */
 
+import './CesiumLoader'
 import httpLoader from './HttpLoader'
 import uiLoader from './UiLoader'
 import compLoader from './CompLoader'

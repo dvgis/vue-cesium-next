@@ -6,24 +6,24 @@
 import axios from 'axios'
 
 const instance = axios.create({
-  timeout: 15000,
+  timeout: 15000
 })
 
 function initInterceptors(instance) {
   instance.interceptors.request.use(
-    (config) => {
+    config => {
       return config
     },
-    (error) => {
+    error => {
       return Promise.reject(error)
     }
   )
 
   instance.interceptors.response.use(
-    (response) => {
+    response => {
       return response
     },
-    (error) => {
+    error => {
       return Promise.reject(error)
     }
   )
