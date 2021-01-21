@@ -7,9 +7,7 @@ const componentsWatcher = (scanner, app) => {
   scanner.keys().map(key => {
     let name = scanner(key).default.name
     if (name) {
-      app.component(name, function(resolve) {
-        require([key + ''], resolve)
-      })
+      app.component(name, scanner(key).default)
     }
   })
 }
