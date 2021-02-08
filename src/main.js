@@ -13,12 +13,21 @@ import { createApp } from 'vue'
   Promise.all([
     import('./App.vue'),
     import('./router'),
+    import('./store'),
     import('./loader')
-  ]).then(([{ default: App }, { default: router }, { default: appLoader }]) => {
-    const app = createApp(App)
-    app.config.productionTip = false
-    app.use(router)
-    app.use(appLoader)
-    app.mount('#app')
-  })
+  ]).then(
+    ([
+      { default: App },
+      { default: router },
+      { default: store },
+      { default: appLoader }
+    ]) => {
+      const app = createApp(App)
+      app.config.productionTip = false
+      app.use(router)
+      app.use(store)
+      app.use(appLoader)
+      app.mount('#app')
+    }
+  )
 })()

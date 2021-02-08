@@ -8,10 +8,10 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@dvgis/cesium-map": "^2.2.2",
+    "@dvgis/cesium-map": "^2.4.1",
     "ant-design-vue": "^2.0.0-rc.5",
     "axios": "^0.21.1",
-    "cesium": "^1.77.0",
+    "cesium": "^1.78.0",
     "core-js": "^3.6.5",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
