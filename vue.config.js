@@ -1,37 +1,24 @@
 /**
- * @Author: Caven
- * @Date: 2020-12-24 20:32:12
- */
+  @Author: Caven Chen
+  @Date: 2023-05-22
+**/
 
-'use strict'
-
+const { defineConfig } = require('@vue/cli-service')
+const cesium = 'node_modules/@cesium/engine'
 const path = require('path')
-const cesiumBuild = './node_modules/cesium/Build/Cesium'
 const webpack = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin')
 
-let resolve = dir => {
+let resolve = (dir) => {
   return path.resolve(__dirname, dir)
 }
 
-module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
-  productionSourceMap: false,
-  configureWebpack: {
-    module: {
-      unknownContextCritical: false
-    },
-    performance: {
-      hints: false
-    }
-  },
-  chainWebpack: config => {
-    config.resolve.extensions
-      .add('.js')
-      .add('.vue')
-      .end()
-      .alias.set('cesium', path.resolve(__dirname, cesiumBuild))
-      .end()
+module.exports = defineConfig({
+  transpileDependencies: true,
+
+  chainWebpack: (config) => {
+    config.resolve.extensions.add('.js').add('.vue').end()
 
     config.module
       .rule('images')
@@ -39,8 +26,8 @@ module.exports = {
       .use('url-loader')
       .loader('url-loader')
       .options({
-        name: 'images/[name].[ext]',
-        limit: 10000
+        name: 'images/[name].[exts]',
+        limit: 10000,
       })
       .end()
 
@@ -50,56 +37,37 @@ module.exports = {
       .use('url-loader')
       .loader('url-loader')
       .options({
-        name: 'fonts/[name].[ext]',
-        limit: 10000
+        name: 'fonts/[name].[exts]',
+        limit: 10000,
       })
       .end()
 
-    config.module
-      .rule('svg')
-      .exclude.add(resolve('src/assets/svg/icons'))
-      .end()
-
-    config.module
-      .rule('icons')
-      .test(/\.svg$/)
-      .include.add(resolve('src/assets/svg/icons'))
-      .end()
-      .use('svg-sprite-loader')
-      .loader('svg-sprite-loader')
-      .options({
-        symbolId: 'icon-[name]'
-      })
-      .end()
-
-    config
-      .plugin('copy')
-      .use(CopyWebpackPlugin, [
-        {
-          patterns: [
-            {
-              from: path.join(cesiumBuild, 'Workers'),
-              to: 'resources/Workers'
-            },
-            { from: path.join(cesiumBuild, 'Assets'), to: 'resources/Assets' },
-            {
-              from: path.join(cesiumBuild, 'Widgets'),
-              to: 'resources/Widgets'
-            },
-            {
-              from: path.join(cesiumBuild, 'ThirdParty'),
-              to: 'resources/ThirdParty'
-            }
-          ]
-        }
-      ])
-      .end()
+    config.plugin('copy').use(CopyWebpackPlugin, [
+      {
+        patterns: [
+          {
+            from: path.join(cesium, 'Build/Workers'),
+            to: path.join(__dirname, 'dist', 'resources/Workers'),
+          },
+          {
+            from: path.join(cesium, 'Source/Assets'),
+            to: path.join(__dirname, 'dist', 'resources/Assets'),
+          },
+          {
+            from: path.join(cesium, 'Source/ThirdParty'),
+            to: path.join(__dirname, 'dist', 'resources/ThirdParty'),
+          },
+        ],
+      },
+    ])
 
     config
       .plugin('define')
       .use(webpack.DefinePlugin, [
-        { CESIUM_BASE_URL: JSON.stringify('resources/') }
+        { CESIUM_BASE_URL: JSON.stringify('resources/') },
       ])
       .end()
-  }
-}
+
+    config.plugin('polyfill').use(NodePolyfillPlugin)
+  },
+})
