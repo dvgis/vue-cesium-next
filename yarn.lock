@@ -1003,10 +1003,10 @@
   resolved "https://registry.npmmirror.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
-"@dvgis/cesium-map@^1.0.1":
-  version "1.0.1"
-  resolved "http://localhost:4873/@dvgis/cesium-map/-/cesium-map-1.0.1.tgz#506d82f8a6d86ee204ca7b52e64149b6b641abcf"
-  integrity sha512-NkqbSO3ayrW7M5p59tWAfL8I4VCPO7v6Tz5yiDbHYdvrOZUq16z28bBeqEb508xc+A1cAqqYATQqdioOGqSvEA==
+"@dvgis/cesium-map@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@dvgis/cesium-map/-/cesium-map-3.0.0.tgz#16333ab6619d113eac33f60322527e6251ee68d7"
+  integrity sha512-5LPOql6lyuEfDv2egfWbYlsbt9k7uT2Kp+UwJWgko7QAS48QACtITU11Bt57mxgtT1003PXPd3jIjQnlEqjUpw==
   dependencies:
     "@cesium/engine" "^2.4.0"
 

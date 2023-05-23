@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@cesium/engine": "^2.4.0",
-    "@dvgis/cesium-map": "^1.0.1",
+    "@dvgis/cesium-map": "^3.0.0",
     "core-js": "^3.8.3",
     "vue": "^3.2.13"
   },
